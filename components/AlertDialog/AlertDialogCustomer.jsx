@@ -1,3 +1,5 @@
+"use client"
+
 import { Trash2 } from "lucide-react"
 import { useCustomerProvider } from "./Provider/Customer-Provider"
 
@@ -15,7 +17,7 @@ export const AlertDialogCustomer = ({ id, title }) => {
                     <div>{title}</div>
                 </div>
                 <p className="w-full text-sm lg:text-md my-2 text-gray-700">
-                    Are you sure want to delete. This action can't be revert?
+                    Are you sure want to delete. This action can&apos;t be revert?
                 </p>
                 <div className="flex justify-center lg:justify-end items-center gap-3 pt-3">
                     <button onClick={() => {

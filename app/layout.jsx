@@ -11,6 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +24,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ProductProvider>
-          <CustomerProvider>
-            <InvoiceProvider>
-              {children}
-            </InvoiceProvider>
-          </CustomerProvider>
-        </ProductProvider>
+        <ThemeProvider
+          attribute="class"
+          forcedTheme="dark"
+          disableTransitionOnChange>
+          <ProductProvider>
+            <CustomerProvider>
+              <InvoiceProvider>
+                {children}
+              </InvoiceProvider>
+            </CustomerProvider>
+          </ProductProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

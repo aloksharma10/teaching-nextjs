@@ -50,7 +50,6 @@ export const CustomerForm = () => {
     if (resetFlagCustomer) {
       form.reset()
     }
-    console.log(values)
   }
 
   return (

@@ -1,55 +1,51 @@
+
+
 "use client"
-
+import { Payment, columns } from "@/components/customer/column"
+import { DataTable } from "@/components/customer/data-table"
 import { Pencil, Trash2 } from 'lucide-react';
-import { useProductProvider } from '@/components/provider/product-provider';
+import { useEffect, useState } from "react";
+import { useProductProvider } from "../provider/product-provider";
 
-export const ProductTable = () => {
-    const { products, setHasEditingProduct, setAlertVisibleProduct } = useProductProvider()
+// export function getData() {
+//     const { customers, setHasEditingCustomer, setAlertVisibleCustomer } = useCustomerProvider()
+
+//     return customers.map((item) => ({
+//         id: item.id,
+//         customerName: item.customerName,
+//         address: item.address,
+//         gstIn: item.gstIn,
+//         state: item.state,
+//         stateCode: item.stateCode,  
+//     }));
+
+// }
+
+export default function DemoPageProduct() {
+    const { products } = useProductProvider();
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            // Fetch the customer data and set it to the state
+            const formattedData = customers.map((item) => ({
+                id: item.id,
+                customerName: item.customerName,
+                address: item.address,
+                gstIn: item.gstIn,
+                state: item.state,
+                stateCode: item.stateCode,
+            }));
+            setData(formattedData);
+        };
+
+        fetchData();
+    }, [products]); // Only re-run the effect if customers change
+
+
     return (
-        <div className='max-h-[500px] lg:max-h-[700px] lg:w-fit relative rounded-md border border-gray-200 overflow-x-scroll overflow-y-scroll sidebarscroll-hide'>
-            <table className="items-center bg-transparent border-collapse">
-                <thead className='sticky top-0 w-full bg-customColor-100 text-white uppercase'>
-                    <tr>
-                        <th className="whitespace-nowrap px-3 text-xs lg:text-lg align-middle py-3 font-semibold">
-                            Product Name</th>
-                        <th className="whitespace-nowrap px-3 text-xs lg:text-lg align-middle py-3 font-semibold">
-                            HSN Code
-                        </th>
-                        <th className="whitespace-nowrap px-3 text-xs lg:text-lg align-middle py-3 font-semibold">
-                            CGST Rate
-                        </th>
-                        <th className="whitespace-nowrap px-3 text-xs lg:text-lg align-middle py-3 font-semibold">
-                            SGST Rate
-                        </th>
-                        <th className="whitespace-nowrap px-3 text-xs lg:text-lg align-middle py-3 font-semibold" colSpan={2}>Actions
-                        </th>
-
-                    </tr>
-                </thead>
-                <tbody className='lg:text-lg'>
-                    {products?.map((item) => (
-                        <tr key={item._id} className='h-10 text-center'>
-                            <th className="whitespace-nowrap px-3 lg:p-3 align-middle border-gray-200 border-b text-xs lg:text-lg">
-                                {item.productName}
-                            </th>
-                            <td className="px-3 lg:p-3 align-middle border-gray-200 border-b text-xs lg:text-lg">
-                                {item.hsnCode}
-                            </td>
-                            <td className="px-3 lg:p-3 align-center border-gray-200 border-b text-xs lg:text-lg">
-                                {item.cgstRate}
-                            </td>
-                            <td className="px-3 lg:p-3 align-middle border-gray-200 border-b text-xs lg:text-lg">
-                                {item.sgstRate}
-                            </td>
-                            <td onClick={() => setHasEditingProduct(item)} className="px-3 lg:px-5 lg:my-10 align-middle border-gray-200 border-b text-xs lg:text-lg whitespace-nowrap cursor-pointer">
-                                <Pencil className="text-gray-500" size={20} /></td>
-                            <td onClick={() => setAlertVisibleProduct(item._id)} className="px-3 lg:px-5 lg:my-10 align-middle border-gray-200 border-b text-xs lg:text-lg whitespace-nowrap cursor-pointer">
-                                <Trash2 className='text-red-500' size={20} />
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className="container mx-auto py-10">
+            <DataTable columns={columns} data={data} />
         </div>
     )
 }

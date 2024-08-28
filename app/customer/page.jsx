@@ -1,4 +1,4 @@
-import { CustomerTable } from "@/components/customer/customer-table"
+import CustomerTable from "@/components/customer/customer-table"
 import { CustomerForm } from "@/components/customer/customerform"
 
 export default function Customer  ()  {
